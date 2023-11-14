@@ -1,0 +1,14 @@
+.header__sign-out {
+  font-size: 1.125rem;
+  line-height: 1.2;
+  color: #a9a9a9;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  transition: all 0.35s linear;
+}
+
+.header__sign-out:hover {
+  color: #fff;
+}
