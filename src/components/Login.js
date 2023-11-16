@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { AuthForm } from './AuthForm';
+
 export const Login = ({ onLogin }) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -18,9 +20,9 @@ export const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="authentication">
+    <main className="authentication">
       <h1 className="authentication__title">Вход</h1>
-      <form onSubmit={handleSubmit} className="authentication__form">
+      <AuthForm name="register" textButton="Войти" onSubmit={handleSubmit}>
         <input
           value={userName}
           onChange={handleChangeName}
@@ -37,10 +39,7 @@ export const Login = ({ onLogin }) => {
           required
           className="authentication__input"
         />
-        <button type="submit" className="authentication__button">
-          Войти
-        </button>
-      </form>
-    </div>
+      </AuthForm>
+    </main>
   );
 };

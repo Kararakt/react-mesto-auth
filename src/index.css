@@ -37,6 +37,8 @@
 @import url("../src/blocks/authentication/__form/authentication__form.css");
 @import url("../src/blocks/authentication/__input/authentication__input.css");
 @import url("../src/blocks/authentication/__button/authentication__button.css");
+@import url("../src/blocks/authentication/__caption/authentication__caption.css");
+@import url("../src/blocks/authentication/__link/authentication__link.css");
 
 @import url("../src/blocks/footer/footer.css");
 @import url("../src/blocks/footer/__copyright/footer__copyright.css");

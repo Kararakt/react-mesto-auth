@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { AuthForm } from './AuthForm';
 
 export const Register = ({ onRegister }) => {
   const [userName, setUserName] = useState('');
@@ -21,9 +24,13 @@ export const Register = ({ onRegister }) => {
   };
 
   return (
-    <div className="authentication">
+    <main className="authentication">
       <h1 className="authentication__title">Регистрация</h1>
-      <form onSubmit={handleSubmit} className="authentication__form">
+      <AuthForm
+        name="register"
+        textButton="Регистрация"
+        onSubmit={handleSubmit}
+      >
         <input
           value={userName}
           onChange={handleChangeName}
@@ -40,10 +47,13 @@ export const Register = ({ onRegister }) => {
           required
           className="authentication__input"
         />
-        <button type="submit" className="authentication__button">
-          Регистрация
-        </button>
-      </form>
-    </div>
+      </AuthForm>
+      <p className="authentication__caption">
+        Уже зарегистрированы?{' '}
+        <Link to="/sign-in" className="authentication__link">
+          Войти
+        </Link>
+      </p>
+    </main>
   );
 };

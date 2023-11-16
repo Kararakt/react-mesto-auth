@@ -234,7 +234,9 @@ export const App = () => {
           }
         />
         <Route path="/sign-in" element={<Login onLogin={onLogin} />} />
+
         <Route path="/sign-up" element={<Register onRegister={onRegister} />} />
+
         <Route
           path="*"
           element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}
