@@ -21,7 +21,7 @@
 ## Установка
 1. Клонируйте репозиторий
 ```sh
-https://github.com/Kararakt/mesto.git
+https://github.com/Kararakt/react-mesto-auth.git
 ```
 2. Установите все необходимые NPM пакеты
 ```sh
