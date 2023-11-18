@@ -8,6 +8,7 @@ export const PopupWithForm = ({
   onSubmit,
   children,
   textButton,
+  disabled = false,
 }) => {
   useClosePopupByEsc(isOpen, onClose);
   return (
@@ -26,9 +27,13 @@ export const PopupWithForm = ({
           onClick={onClose}
         ></button>
         <h2 className="popup__title">{title}</h2>
-        <form name={name} onSubmit={onSubmit} className="popup__form">
+        <form name={name} onSubmit={onSubmit} noValidate className="form">
           {children}
-          <button type="submit" className="popup__submit-button">
+          <button
+            type="submit"
+            disabled={disabled}
+            className="form__submit-button"
+          >
             {textButton}
           </button>
         </form>

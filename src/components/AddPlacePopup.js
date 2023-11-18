@@ -1,31 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+
+import { useFormAndValidation } from '../hooks/useFormAndValidation';
+
 import { PopupWithForm } from './PopupWithForm';
 
 export const AddPlacePopup = ({ isOpen, onClose, onPlaceAdd }) => {
-  const [name, setName] = useState('');
-  const [link, setLink] = useState('');
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     onPlaceAdd({
-      name,
-      link,
+      name: values.name,
+      link: values.link,
     });
   };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleLinkChange = (event) => {
-    setLink(event.target.value);
-  };
-
   useEffect(() => {
-    setName('');
-    setLink('');
-  }, [isOpen]);
+    resetForm();
+  }, [resetForm, isOpen]);
 
   return (
     <PopupWithForm
@@ -35,6 +29,7 @@ export const AddPlacePopup = ({ isOpen, onClose, onPlaceAdd }) => {
       onClose={onClose}
       textButton="Создать"
       onSubmit={handleSubmit}
+      disabled={!isValid}
     >
       <input
         type="text"
@@ -44,24 +39,22 @@ export const AddPlacePopup = ({ isOpen, onClose, onPlaceAdd }) => {
         maxLength="30"
         autoComplete="off"
         required
-        id="name"
-        value={name}
-        onChange={handleNameChange}
-        className="popup__input popup__input_type_name"
+        value={values.name || ''}
+        onChange={handleChange}
+        className="form__input"
       />
-      <span id="name-error" className="popup__input-error"></span>
+      <span className="form__input-error">{errors.name}</span>
       <input
         type="url"
         name="link"
         placeholder="Введите ссылку на картинку"
-        id="link"
         required
         autoComplete="off"
-        value={link}
-        onChange={handleLinkChange}
-        className="popup__input popup__input_type_link"
+        value={values.link || ''}
+        onChange={handleChange}
+        className="form__input"
       />
-      <span id="link-error" className="popup__input-error"></span>
+      <span className="form__input-error">{errors.link}</span>
     </PopupWithForm>
   );
 };

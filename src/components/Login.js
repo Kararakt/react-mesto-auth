@@ -1,44 +1,58 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { authInputClass } from '../utils/constants';
+import { useFormAndValidation } from '../hooks/useFormAndValidation';
 
 import { AuthForm } from './AuthForm';
 
 export const Login = ({ onLogin }) => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChangeName = (event) => {
-    setUserName(event.target.value);
-  };
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
+  const { values, handleChange, errors, isValid } = useFormAndValidation({});
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    onLogin({ password, email: userName });
+    onLogin({ password: values.password, email: values.email });
   };
 
   return (
     <main className="authentication">
       <h1 className="authentication__title">Вход</h1>
-      <AuthForm name="register" textButton="Войти" onSubmit={handleSubmit}>
+      <AuthForm
+        name="register"
+        textButton="Войти"
+        disabled={isValid}
+        onSubmit={handleSubmit}
+      >
         <input
-          value={userName}
-          onChange={handleChangeName}
+          value={values.email || ''}
+          onChange={handleChange}
           placeholder="Email"
           type="email"
+          name="email"
+          minLength={10}
+          maxLength={50}
+          autoComplete="off"
           required
-          className="authentication__input"
+          className={
+            authInputClass + ` ${errors.email && 'form__input_type_error'}`
+          }
         />
+        <span className="form__input-error">{errors.email}</span>
         <input
-          value={password}
-          onChange={handleChangePassword}
+          value={values.password || ''}
+          onChange={handleChange}
           placeholder="Пароль"
           type="password"
+          name="password"
+          minLength={6}
+          maxLength={40}
+          autoComplete="off"
           required
-          className="authentication__input"
+          className={
+            authInputClass + ` ${errors.password && 'form__input_type_error'}`
+          }
         />
+        <span className="form__input-error">{errors.password}</span>
       </AuthForm>
     </main>
   );
