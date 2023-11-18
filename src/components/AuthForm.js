@@ -18,4 +18,3 @@ export const AuthForm = ({
     </form>
   );
 };
-// dasaaadaadasda@afds.com
